@@ -1,0 +1,40 @@
+{
+  "name": "wmpsc-api",
+  "version": "1.0.0",
+  "description": "Production level Express API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "netlify dev",
+    "build": "npm install && bash ./build.sh && cd netlify/functions && npm install",
+    "postinstall": "cd netlify/functions && npm install",
+    "copy-views": "mkdir -p netlify/functions/views && cp -r views/* netlify/functions/views/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3",
+    "multer": "^1.4.5-lts.1",
+    "netlify-lambda": "^2.0.16",
+    "serverless-http": "^3.2.0",
+    "sharp": "^0.33.5",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.0.5",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "@netlify/functions": "^2.0.0"
+  }
+}

@@ -1,0 +1,38 @@
+// ...existing html...
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const errorDiv = document.getElementById('errorMessage');
+        const formData = new FormData(e.target);
+        
+        try {
+            const response = await fetch('/.netlify/functions/server/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: formData.get('username'),
+                    password: formData.get('password')
+                }),
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                const dashboardUrl = '/.netlify/functions/server/dashboard';
+                console.log('Redirecting to:', dashboardUrl);
+                window.location.href = dashboardUrl;
+            } else {
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = data.message || 'Login failed';
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'An error occurred during login';
+        }
+    });
+</script>
+// ...rest of html...

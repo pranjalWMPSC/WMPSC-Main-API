@@ -1,0 +1,390 @@
+{
+  "info": {
+    "name": "WMPSC API",
+    "_postman_id": "12345-67890-abcdef",
+    "description": "Postman collection for WMPSC API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Candidates",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/candidates",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "candidates"]
+        }
+      }
+    },
+    {
+      "name": "Get Candidate By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/candidates/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "candidates", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Create Candidate",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"batchName\": \"Batch 1\",\n  \"batchId\": \"B001\",\n  \"firstName\": \"John\",\n  \"middleName\": \"\",\n  \"lastName\": \"Doe\",\n  \"gender\": \"M\",\n  \"captainProfession\": \"Engineer\",\n  \"inProfessionSince\": 2010,\n  \"dateOfBirth\": \"1990-01-01\",\n  \"age\": 31,\n  \"aadharNumber\": \"123456789012\",\n  \"mobileNumber\": \"9876543210\",\n  \"smartPhoneAvailable\": true,\n  \"whatsappNumber\": \"9876543210\",\n  \"fullAddress\": \"123 Street, City\",\n  \"matchingWithIdProof\": true,\n  \"state\": \"State\",\n  \"district\": \"District\",\n  \"tehsil\": \"Tehsil\",\n  \"pinCode\": \"123456\",\n  \"policeVerificationAvailable\": true,\n  \"maritalStatus\": \"Single\",\n  \"dateOfAnniversary\": null,\n  \"numberOfKids\": 0,\n  \"bankName\": \"Bank\",\n  \"branch\": \"Branch\",\n  \"ifscCode\": \"IFSC001\",\n  \"bankAccountNumber\": \"1234567890\",\n  \"mobileNumberLinkedWithBankAccount\": \"9876543210\",\n  \"upiId\": \"john@upi\",\n  \"scheduledMeetingDate\": \"2021-12-01\",\n  \"assessmentDate\": \"2021-12-10\",\n  \"examStatus\": \"Passed\",\n  \"certificateAwarded\": true,\n  \"certificateDistributionDate\": \"2021-12-15\",\n  \"captainSystemApprovalStatus\": \"Approved\",\n  \"captainId\": \"C001\",\n  \"idProof\": \"Aadhar\",\n  \"bankProofProvided\": true,\n  \"bankProofDocumentType\": \"Passbook\",\n  \"upiIdProvided\": true,\n  \"upiIdDocument\": \"UPI Document\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/candidates",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "candidates"]
+        }
+      }
+    },
+    {
+      "name": "Update Candidate",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"batchName\": \"Batch 1\",\n  \"batchId\": \"B001\",\n  \"firstName\": \"John\",\n  \"middleName\": \"\",\n  \"lastName\": \"Doe\",\n  \"gender\": \"M\",\n  \"captainProfession\": \"Engineer\",\n  \"inProfessionSince\": 2010,\n  \"dateOfBirth\": \"1990-01-01\",\n  \"age\": 31,\n  \"aadharNumber\": \"123456789012\",\n  \"mobileNumber\": \"9876543210\",\n  \"smartPhoneAvailable\": true,\n  \"whatsappNumber\": \"9876543210\",\n  \"fullAddress\": \"123 Street, City\",\n  \"matchingWithIdProof\": true,\n  \"state\": \"State\",\n  \"district\": \"District\",\n  \"tehsil\": \"Tehsil\",\n  \"pinCode\": \"123456\",\n  \"policeVerificationAvailable\": true,\n  \"maritalStatus\": \"Single\",\n  \"dateOfAnniversary\": null,\n  \"numberOfKids\": 0,\n  \"bankName\": \"Bank\",\n  \"branch\": \"Branch\",\n  \"ifscCode\": \"IFSC001\",\n  \"bankAccountNumber\": \"1234567890\",\n  \"mobileNumberLinkedWithBankAccount\": \"9876543210\",\n  \"upiId\": \"john@upi\",\n  \"scheduledMeetingDate\": \"2021-12-01\",\n  \"assessmentDate\": \"2021-12-10\",\n  \"examStatus\": \"Passed\",\n  \"certificateAwarded\": true,\n  \"certificateDistributionDate\": \"2021-12-15\",\n  \"captainSystemApprovalStatus\": \"Approved\",\n  \"captainId\": \"C001\",\n  \"idProof\": \"Aadhar\",\n  \"bankProofProvided\": true,\n  \"bankProofDocumentType\": \"Passbook\",\n  \"upiIdProvided\": true,\n  \"upiIdDocument\": \"UPI Document\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/candidates/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "candidates", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Delete Candidate",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/candidates/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "candidates", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Get All Assessments",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/assessments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "assessments"]
+        }
+      }
+    },
+    {
+      "name": "Get Assessment By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/assessments/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "assessments", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Create Assessment",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"candidateId\": \"60d5ec49f8d2b814c8a4b5b1\",\n  \"date\": \"2021-12-10\",\n  \"questions\": [\n    {\n      \"questionId\": \"60d5ec49f8d2b814c8a4b5b2\",\n      \"answer\": \"Answer 1\",\n      \"isCorrect\": true\n    }\n  ],\n  \"totalMarks\": 100,\n  \"percentage\": 90,\n  \"assessmentType\": \"Final\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/assessments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "assessments"]
+        }
+      }
+    },
+    {
+      "name": "Update Assessment",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"candidateId\": \"60d5ec49f8d2b814c8a4b5b1\",\n  \"date\": \"2021-12-10\",\n  \"questions\": [\n    {\n      \"questionId\": \"60d5ec49f8d2b814c8a4b5b2\",\n      \"answer\": \"Answer 1\",\n      \"isCorrect\": true\n    }\n  ],\n  \"totalMarks\": 100,\n  \"percentage\": 90,\n  \"assessmentType\": \"Final\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/assessments/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "assessments", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Delete Assessment",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/assessments/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "assessments", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Get All Questions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/questions",
+          "host": ["{{baseUrl}}"],
+          "path": ["questions"]
+        }
+      }
+    },
+    {
+      "name": "Get Question By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/questions/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["questions", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Create Question",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"What is Node.js?\",\n  \"answer\": \"Node.js is a JavaScript runtime.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/questions",
+          "host": ["{{baseUrl}}"],
+          "path": ["questions"]
+        }
+      }
+    },
+    {
+      "name": "Update Question",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"What is Node.js? (Updated)\",\n  \"answer\": \"Node.js is a JavaScript runtime (Updated).\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/questions/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["questions", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Delete Question",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/questions/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["questions", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Get All TP Routes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tp",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp"]
+        }
+      }
+    },
+    {
+      "name": "Get TP Route By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tp/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Create TP Route",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"New TP Route\",\n  \"description\": \"TP Route description\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tp",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp"]
+        }
+      }
+    },
+    {
+      "name": "Update TP Route",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated TP Route\",\n  \"description\": \"Updated description\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tp/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Delete TP Route",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tp/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Upload Image",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "multipart/form-data"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": ""
+            },
+            {
+              "key": "aadharNumber",
+              "value": "123456789012",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/images/upload",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "images", "upload"]
+        }
+      }
+    },
+    {
+      "name": "Upload Aadhar Photo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "multipart/form-data"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "aadharPhoto",
+              "type": "file",
+              "src": ""
+            },
+            {
+              "key": "aadharNumber",
+              "value": "123456789012",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/assessments/:id/aadhar-photo",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "assessments", ":id", "aadhar-photo"]
+        }
+      }
+    },
+    {
+      "name": "Upload Profile Photo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "multipart/form-data"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "profilePhoto",
+              "type": "file",
+              "src": ""
+            },
+            {
+              "key": "aadharNumber",
+              "value": "123456789012",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/assessments/:id/profile-photo",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "assessments", ":id", "profile-photo"]
+        }
+      }
+    },
+    {
+      "name": "Get Images By Aadhar Number",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/images/aadhar/:aadharNumber",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "images", "aadhar", ":aadharNumber"]
+        }
+      }
+    }
+  ]
+}
