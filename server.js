@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const mongoose = require('mongoose'); // Add mongoose
 const { errorHandler } = require('./utils/errorHandler');
 const swaggerUi = require('swagger-ui-express');
 const { specs } = require('./swagger');
@@ -15,7 +15,28 @@ dotenv.config();
 console.log(`SWAGGER_USER: ${process.env.SWAGGER_USER}`);
 console.log(`SWAGGER_PASSWORD: ${process.env.SWAGGER_PASSWORD}`);
 
-// Connect to database
+// Connect to database with error handling
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected) return;
+
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+      serverSelectionTimeoutMS: 5000
+    });
+    isConnected = true;
+    console.log('MongoDB Connected');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+};
+
+// Initialize database connection
 connectDB();
 
 const app = express();
@@ -111,27 +132,15 @@ app.use(errorHandler);
 
 // Only listen to port in development mode
 if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 5000;
-  app.listen(
-    PORT,
-    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
-  );
+  app.listen(process.env.PORT || 5000, () => {
+    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${process.env.PORT}`);
+  });
 }
 
 // Export the Express app for Vercel
 module.exports = app;
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (err, promise) => {
+process.on('unhandledRejection', (err) => {
   console.error(`Error: ${err.message}`);
-  server.close(() => process.exit(1));
-});
-
-// Automatically restart the server after a crash
-process.on('exit', () => {
-  require('child_process').spawn(process.argv.shift(), process.argv, {
-    cwd: process.cwd(),
-    detached: true,
-    stdio: 'inherit'
-  });
 });
