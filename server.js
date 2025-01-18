@@ -87,8 +87,8 @@ app.use('/api-docs', swaggerAuth, swaggerUi.serve, swaggerUi.setup(specs, {
   customSiteTitle: "WMPSC API Documentation"
 }));
 
-// Route files
-const tpRoutes = require(process.env.TP_ROUTES_PATH);
+// Route files - Fix TP routes import
+const tpRoutes = require('./routes/tpRoutes'); // Changed from process.env.TP_ROUTES_PATH
 const assessmentRoutes = require('./routes/assessmentRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const candidateRoutes = require('./routes/candidateRoutes');
