@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { getMongoStatus } = require('../utils/dbStatus');
 const router = express.Router();
 const logDir = path.join(__dirname, '../../logs');
 
@@ -34,6 +35,14 @@ router.get('/api/dashboard/stats', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch dashboard stats' });
     }
+});
+
+router.get('/status', (req, res) => {
+    const dbStatus = getMongoStatus();
+    res.json({
+        api: 'operational',
+        database: dbStatus
+    });
 });
 
 function getTopEndpoints(logs) {

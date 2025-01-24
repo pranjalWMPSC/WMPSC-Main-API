@@ -8,7 +8,7 @@ const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const { requestLogger, errorLogger } = require('./middleware/loggerMiddleware'); // Updated path
-const dashboardRoutes = require('./routes/dashboardRoutes');
+// const dashboardRoutes = require('./routes/dashboardRoutes');
 
 // Load env vars
 dotenv.config();
@@ -102,7 +102,7 @@ app.use('/api/assessments', assessmentRoutes);
 app.use('/questions', questionRoutes);
 app.use('/api/candidates', candidateRoutes);
 app.use('/api/images', imageRoutes);
-app.use('/api/dashboard', dashboardRoutes);
+// app.use('/api/dashboard', dashboardRoutes);
 
 // Update the root route to handle both / and /login
 app.get(['/', '/login'], (req, res) => {
@@ -132,8 +132,10 @@ app.use(errorHandler);
 
 // Only listen to port in development mode
 if (process.env.NODE_ENV !== 'production') {
-  app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${process.env.PORT}`);
+  const port = process.env.PORT || 3000;
+
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
   });
 }
 

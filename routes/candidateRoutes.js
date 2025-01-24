@@ -1,8 +1,7 @@
 const express = require('express');
-const candidateController = require('../controllers/candidateController');
-const { getAllCandidates, getCandidateById, createCandidate, updateCandidate, deleteCandidate } = candidateController;
-
 const router = express.Router();
+const candidateController = require('../controllers/candidateController');
+const { protect } = require('../middleware/authMiddleware');
 
 /**
  * @swagger
@@ -226,105 +225,26 @@ const router = express.Router();
  *                   type: string
  *                   example: 'Aadhar number already exists'
  */
-router.get('/', getAllCandidates);
 
-/**
- * @swagger
- * /api/candidates/{id}:
- *   get:
- *     summary: Get a candidate by ID
- *     tags: [Candidates]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: The candidate ID
- *     responses:
- *       200:
- *         description: A candidate
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Candidate'
- *       404:
- *         description: Candidate not found
- */
-router.get('/:id', getCandidateById);
+// Define routes in order of specificity (most specific first)
+// 1. Static routes
+router.get('/search/:aadhar', candidateController.searchByAadhar); // Add direct aadhar parameter route
+router.get('/search', candidateController.searchByAadhar);         // Keep query parameter route as fallback
+// router.get('/health', candidateController.healthCheck);
+router.post('/bulk', candidateController.bulkCreateCandidates); // Bulk create endpoint
 
-/**
- * @swagger
- * /api/candidates:
- *   post:
- *     summary: Create a new candidate
- *     tags: [Candidates]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Candidate'
- *     responses:
- *       201:
- *         description: Candidate created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Candidate'
- */
-router.post('/', createCandidate);
+// 2. TP Email routes (specific before general ID routes)
+router.get('/tp/:tpEmail/batches', candidateController.getTPBatches);
+router.get('/tp/:tpEmail', candidateController.getCandidatesByTP);
 
-/**
- * @swagger
- * /api/candidates/{id}:
- *   put:
- *     summary: Update a candidate
- *     tags: [Candidates]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: The candidate ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Candidate'
- *     responses:
- *       200:
- *         description: Candidate updated
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Candidate'
- *       404:
- *         description: Candidate not found
- */
-router.put('/:id', updateCandidate);
+// 3. Batch routes
+router.get('/batch/:batchId/tp/:tpEmail', candidateController.getCandidatesByBatch);
 
-/**
- * @swagger
- * /api/candidates/{id}:
- *   delete:
- *     summary: Delete a candidate
- *     tags: [Candidates]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: The candidate ID
- *     responses:
- *       200:
- *         description: Candidate deleted
- *       404:
- *         description: Candidate not found
- */
-router.delete('/:id', deleteCandidate);
+// 4. General CRUD routes
+router.get('/', candidateController.getAllCandidates);
+router.post('/', candidateController.createCandidate);
+router.get('/:id', candidateController.getCandidateById);
+router.put('/:id', candidateController.updateCandidate);
+router.delete('/:id', candidateController.deleteCandidate);
 
 module.exports = router;

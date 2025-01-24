@@ -1,0 +1,205 @@
+{
+    "info": {
+      "name": "WMPSC-Candidates",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Get All Candidates",
+        "request": {
+          "method": "GET",
+          "url": "{{baseUrl}}/api/candidates",
+          "description": "Retrieve all candidates"
+        }
+      },
+      {
+        "name": "Get Candidate by ID",
+        "request": {
+          "method": "GET",
+          "url": "{{baseUrl}}/api/candidates/:id",
+          "description": "Get a specific candidate by ID",
+          "params": [
+            {
+              "key": "id",
+              "value": "",
+              "description": "Candidate ID"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Search by Aadhar",
+        "request": {
+          "method": "GET",
+          "url": "{{baseUrl}}/api/candidates/search",
+          "description": "Search candidate by Aadhar number",
+          "query": [
+            {
+              "key": "aadhar",
+              "value": "123456789012",
+              "description": "12-digit Aadhar number"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Get TP Batches",
+        "request": {
+          "method": "GET",
+          "url": "{{baseUrl}}/api/candidates/tp/{{tpEmail}}/batches",
+          "description": "Get all batches for a TP"
+        }
+      },
+      {
+        "name": "Get Candidates by Batch",
+        "request": {
+          "method": "GET",
+          "url": "{{baseUrl}}/api/candidates/batch/{{batchId}}",
+          "description": "Get all candidates in a batch"
+        }
+      },
+      {
+        "name": "Get Candidates by TP",
+        "request": {
+          "method": "GET",
+          "url": "{{baseUrl}}/api/candidates/tp/{{tpEmail}}",
+          "description": "Get all candidates for a TP"
+        }
+      },
+      {
+        "name": "Create Candidate",
+        "request": {
+          "method": "POST",
+          "url": "{{baseUrl}}/api/candidates",
+          "description": "Create a new candidate",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": {
+              "batchId": "BATCH001",
+              "batchName": "First Batch",
+              "firstName": "John",
+              "lastName": "Doe",
+              "gender": "M",
+              "dateOfBirth": "1990-01-01",
+              "aadharNumber": "123456789012",
+              "mobileNumber": "9876543210",
+              "state": "Delhi",
+              "district": "New Delhi",
+              "tpEmail": "{{tpEmail}}"
+            }
+          }
+        }
+      },
+      {
+        "name": "Bulk Create Candidates",
+        "request": {
+          "method": "POST",
+          "url": "{{baseUrl}}/api/candidates/bulk",
+          "description": "Create multiple candidates (max 100)",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": [
+              {
+                "batchId": "BATCH001",
+                "batchName": "First Batch",
+                "firstName": "John",
+                "lastName": "Doe",
+                "gender": "M",
+                "dateOfBirth": "1990-01-01",
+                "aadharNumber": "123456789012",
+                "mobileNumber": "9876543210",
+                "state": "Delhi",
+                "district": "New Delhi",
+                "tpEmail": "{{tpEmail}}"
+              },
+              {
+                "batchId": "BATCH001",
+                "batchName": "First Batch",
+                "firstName": "Jane",
+                "lastName": "Doe",
+                "gender": "F",
+                "dateOfBirth": "1992-01-01",
+                "aadharNumber": "123456789013",
+                "mobileNumber": "9876543211",
+                "state": "Delhi",
+                "district": "New Delhi",
+                "tpEmail": "{{tpEmail}}"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update Candidate",
+        "request": {
+          "method": "PUT",
+          "url": "{{baseUrl}}/api/candidates/:id",
+          "description": "Update an existing candidate",
+          "params": [
+            {
+              "key": "id",
+              "value": "",
+              "description": "Candidate ID"
+            }
+          ],
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": {
+              "firstName": "John Updated",
+              "lastName": "Doe Updated"
+            }
+          }
+        }
+      },
+      {
+        "name": "Delete Candidate",
+        "request": {
+          "method": "DELETE",
+          "url": "{{baseUrl}}/api/candidates/:id",
+          "description": "Delete a candidate",
+          "params": [
+            {
+              "key": "id",
+              "value": "",
+              "description": "Candidate ID"
+            }
+          ]
+        }
+      }
+    ],
+    "variable": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost:3000",
+        "type": "string"
+      },
+      {
+        "key": "tpEmail",
+        "value": "tp@example.com",
+        "type": "string"
+      },
+      {
+        "key": "batchId",
+        "value": "BATCH001",
+        "type": "string"
+      }
+    ]
+  }

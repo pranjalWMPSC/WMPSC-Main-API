@@ -7,182 +7,191 @@ const mongoose = require('mongoose');
  *     Candidate:
  *       type: object
  *       required:
- *         - batchName
  *         - batchId
+ *         - batchName
  *         - firstName
  *         - lastName
- *         - gender
- *         - captainProfession
- *         - inProfessionSince
- *         - dateOfBirth
- *         - age
  *         - aadharNumber
  *         - mobileNumber
- *         - smartPhoneAvailable
- *         - whatsappNumber
- *         - fullAddress
- *         - matchingWithIdProof
+ *         - dateOfBirth
+ *         - gender
  *         - state
  *         - district
- *         - tehsil
- *         - pinCode
- *         - policeVerificationAvailable
- *         - maritalStatus
- *         - bankName
- *         - branch
- *         - ifscCode
- *         - bankAccountNumber
- *         - mobileNumberLinkedWithBankAccount
- *         - examStatus
- *         - certificateAwarded
- *         - captainSystemApprovalStatus
- *         - captainId
- *         - idProof
- *         - bankProofProvided
- *         - bankProofDocumentType
- *         - upiIdProvided
  *       properties:
- *         batchName:
- *           type: string
  *         batchId:
+ *           type: string
+ *         batchName:
  *           type: string
  *         firstName:
  *           type: string
- *         middleName:
- *           type: string
  *         lastName:
  *           type: string
- *         gender:
- *           type: string
- *           enum: [M, F, Other]
- *         captainProfession:
- *           type: string
- *         inProfessionSince:
- *           type: number
- *         dateOfBirth:
- *           type: string
- *           format: date
- *         age:
- *           type: number
  *         aadharNumber:
  *           type: string
  *         mobileNumber:
  *           type: string
- *         smartPhoneAvailable:
- *           type: boolean
- *         whatsappNumber:
+ *         dateOfBirth:
  *           type: string
- *         fullAddress:
+ *           format: date
+ *         gender:
  *           type: string
- *         matchingWithIdProof:
- *           type: boolean
+ *           enum: [Male, Female, Other]
  *         state:
  *           type: string
  *         district:
  *           type: string
- *         tehsil:
+ *         image:
  *           type: string
- *         pinCode:
- *           type: string
- *         policeVerificationAvailable:
- *           type: boolean
- *         maritalStatus:
- *           type: string
- *         dateOfAnniversary:
- *           type: string
- *           format: date
- *         numberOfKids:
- *           type: number
- *         bankName:
- *           type: string
- *         branch:
- *           type: string
- *         ifscCode:
- *           type: string
- *         bankAccountNumber:
- *           type: string
- *         mobileNumberLinkedWithBankAccount:
- *           type: string
- *         upiId:
- *           type: string
- *         scheduledMeetingDate:
- *           type: string
- *           format: date
- *         assessmentDate:
- *           type: string
- *           format: date
  *         examStatus:
  *           type: string
+ *           enum: [Pending, Passed, Failed]
  *         certificateAwarded:
  *           type: boolean
- *         certificateDistributionDate:
+ *         createdAt:
  *           type: string
- *           format: date
- *         captainSystemApprovalStatus:
+ *           format: date-time
+ *         updatedAt:
  *           type: string
- *         captainId:
- *           type: string
- *         idProof:
- *           type: string
- *         bankProofProvided:
- *           type: boolean
- *         bankProofDocumentType:
- *           type: string
- *         upiIdProvided:
- *           type: boolean
- *         upiIdDocument:
- *           type: string
- *         profilePhoto:
- *           type: string
- *           format: objectId
+ *           format: date-time
  */
 
 const candidateSchema = new mongoose.Schema({
-  batchName: { type: String, required: true },
-  batchId: { type: String, required: true },
-  firstName: { type: String, required: true },
-  middleName: { type: String },
-  lastName: { type: String, required: true },
-  gender: { type: String, enum: ['M', 'F', 'Other'], required: true },
-  captainProfession: { type: String, required: true },
-  inProfessionSince: { type: Number, required: true },
-  dateOfBirth: { type: Date, required: true },
-  age: { type: Number, required: true },
-  aadharNumber: { type: String, unique: true, required: true },
-  mobileNumber: { type: String, required: true },
-  smartPhoneAvailable: { type: Boolean, required: true },
-  whatsappNumber: { type: String, required: true },
-  fullAddress: { type: String, required: true },
-  matchingWithIdProof: { type: Boolean, required: true },
-  state: { type: String, required: true },
-  district: { type: String, required: true },
-  tehsil: { type: String, required: true },
-  pinCode: { type: String, required: true },
-  policeVerificationAvailable: { type: Boolean, required: true },
-  maritalStatus: { type: String, required: true },
-  dateOfAnniversary: { type: Date },
-  numberOfKids: { type: Number },
-  bankName: { type: String, required: true },
-  branch: { type: String, required: true },
-  ifscCode: { type: String, required: true },
-  bankAccountNumber: { type: String, required: true },
-  mobileNumberLinkedWithBankAccount: { type: String, required: true },
-  upiId: { type: String },
-  scheduledMeetingDate: { type: Date },
-  assessmentDate: { type: Date },
-  examStatus: { type: String, required: true },
-  certificateAwarded: { type: Boolean, required: true },
-  certificateDistributionDate: { type: Date },
-  captainSystemApprovalStatus: { type: String, required: true },
-  captainId: { type: String, required: true },
-  idProof: { type: String, required: true },
-  bankProofProvided: { type: Boolean, required: true },
-  bankProofDocumentType: { type: String, required: true },
-  upiIdProvided: { type: Boolean, required: true },
-  upiIdDocument: { type: String },
-  profilePhoto: { type: mongoose.Schema.Types.ObjectId, ref: 'Image' }
+  batchId: {
+    type: String,
+    required: [true, 'Batch ID is required'],
+    trim: true,
+    index: true // Add index for better query performance
+  },
+  batchName: {
+    type: String,
+    required: [true, 'Batch name is required'],
+    trim: true
+  },
+  firstName: {
+    type: String,
+    required: [true, 'First name is required'],
+    trim: true
+  },
+  lastName: {
+    type: String,
+    required: [true, 'Last name is required'],
+    trim: true
+  },
+  gender: {
+    type: String,
+    required: [true, 'Gender is required'],
+    enum: {
+      values: ['M', 'F', 'Other'],
+      message: 'Gender must be either M, F, or Other'
+    }
+  },
+  dateOfBirth: {
+    type: Date,
+    required: [true, 'Date of birth is required']
+  },
+  aadharNumber: {
+    type: String,
+    required: [true, 'Aadhar number is required'],
+    unique: true,
+    minlength: [12, 'Aadhar number must be 12 digits'],
+    maxlength: [12, 'Aadhar number must be 12 digits']
+  },
+  mobileNumber: {
+    type: String,
+    required: [true, 'Mobile number is required'],
+    minlength: [10, 'Mobile number must be 10 digits'],
+    maxlength: [10, 'Mobile number must be 10 digits']
+  },
+  state: {
+    type: String,
+    required: [true, 'State is required']
+  },
+  smartPhoneAvailable: Boolean,
+  whatsappNumber: String,
+  fullAddress: String,
+  matchingWithIdProof: Boolean,
+  district: {
+    type: String,
+    required: [true, 'District is required']
+  },
+  tehsil: String,
+  pinCode: String,
+  policeVerificationAvailable: Boolean,
+  maritalStatus: String,
+  dateOfAnniversary: Date,
+  numberOfKids: Number,
+  bankDetails: {
+    bankName: String,
+    branch: String,
+    ifscCode: String,
+    accountNumber: String,
+    linkedMobile: String,
+    upiId: String,
+    proofProvided: Boolean,
+    proofDocumentType: String
+  },
+  meeting: {
+    scheduledDate: Date,
+    assessmentDate: Date
+  },
+  examination: {
+    status: {
+      type: String,
+      enum: ['Pending', 'Passed', 'Failed'],
+      default: 'Pending'
+    },
+    certificateAwarded: {
+      type: Boolean,
+      default: false
+    },
+    certificateDistributionDate: Date
+  },
+  captain: {
+    systemApprovalStatus: String,
+    id: String
+  },
+  documents: {
+    idProof: String,
+    upiDocument: String
+  },
+  image: String,
+  email: {
+    type: String,
+    required: false, // Make email optional
+    trim: true,
+    lowercase: true,
+    validate: {
+      validator: function(v) {
+        // Allow null/empty or valid email
+        return v === null || v === '' || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+      },
+      message: 'Please provide a valid email address'
+    }
+  },
+  tpEmail: {
+    type: String,
+    required: [true, 'TP Email is required'],
+    trim: true,
+    lowercase: true,
+    index: true // Add index for better query performance
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-const Candidate = mongoose.model('Candidate', candidateSchema);
+// Remove any existing unique index on email if it exists
+candidateSchema.index({ email: 1 }, { unique: false });
 
-module.exports = Candidate;
+// Update timestamp on save
+candidateSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+module.exports = mongoose.model('Candidate', candidateSchema);

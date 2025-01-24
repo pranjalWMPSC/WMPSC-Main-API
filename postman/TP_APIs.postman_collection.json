@@ -1,0 +1,93 @@
+{
+  "info": {
+    "name": "TP APIs",
+    "description": "Collection of all TP-related APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register TP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"TP Name\",\n  \"email\": \"tp@example.com\",\n  \"password\": \"password123\",\n  \"spocName\": \"SPOC Name\",\n  \"mobileNumber\": \"1234567890\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tp/register",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp", "register"]
+        }
+      }
+    },
+    {
+      "name": "Login TP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"tp@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tp/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp", "login"]
+        }
+      }
+    },
+    {
+      "name": "Deactivate TP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"tp@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tp/deactivate",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp", "deactivate"]
+        }
+      }
+    },
+    {
+      "name": "Activate TP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"tp@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tp/activate",
+          "host": ["{{baseUrl}}"],
+          "path": ["tp", "activate"]
+        }
+      }
+    }
+  ]
+}

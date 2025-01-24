@@ -1,3 +1,6 @@
 node_modules/
 config/config.env
 logs/
+postman_collection.json
+# Local Netlify folder
+.netlify

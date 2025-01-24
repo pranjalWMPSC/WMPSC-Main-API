@@ -13,9 +13,13 @@ const AssessmentSchema = new mongoose.Schema({
     type: Date,
     required: [true, 'Please add an assessment date']
   },
-  subject: {
+  qpName: {
     type: String,
-    required: [true, 'Please add a subject or QP']
+    required: [true, 'Please add a QP name']
+  },
+  qpCode: {
+    type: String,
+    required: [true, 'Please add a QP code']
   },
   metadata: {
     type: String,
@@ -39,6 +43,18 @@ const AssessmentSchema = new mongoose.Schema({
       required: [true, 'Please add the number of hard questions']
     }
   },
+  nos: [
+    {
+      code: {
+        type: String,
+        required: [true, 'Please add the NOS code']
+      },
+      numberOfQuestions: {
+        type: Number,
+        required: [true, 'Please add the number of questions for this NOS']
+      }
+    }
+  ],
   createdAt: {
     type: Date,
     default: Date.now
@@ -49,11 +65,12 @@ const AssessmentSchema = new mongoose.Schema({
   }
 });
 
-// Ensure the total number of questions matches the sum of difficulty levels
+// Ensure the total number of questions matches the sum of difficulty levels and NOS questions
 AssessmentSchema.pre('save', function(next) {
   const totalQuestions = this.difficulty.easy + this.difficulty.medium + this.difficulty.hard;
-  if (totalQuestions !== this.numberOfQuestions) {
-    return next(new Error('Total number of questions does not match the sum of difficulty levels'));
+  const totalNosQuestions = this.nos.reduce((sum, nos) => sum + nos.numberOfQuestions, 0);
+  if (totalQuestions !== this.numberOfQuestions || totalNosQuestions !== this.numberOfQuestions) {
+    return next(new Error('Total number of questions does not match the sum of difficulty levels or NOS questions'));
   }
   next();
 });
@@ -64,4 +81,4 @@ AssessmentSchema.pre('save', function(next) {
   next();
 });
 
-module.exports = mongoose.model('Assessment', AssessmentSchema);
+module.exports = mongoose.models.Assessment || mongoose.model('Assessment', AssessmentSchema);

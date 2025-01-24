@@ -1,35 +1,29 @@
-const sharp = require('sharp');
+const fs = require('fs').promises;
+const path = require('path');
 const Image = require('../models/imageModel');
 const Candidate = require('../models/candidateModel');
 
-exports.uploadImage = async (req, res, next) => {
+exports.uploadImage = async (req, res) => {
   try {
-    const { originalname, buffer, mimetype } = req.file;
-    const { aadharNumber } = req.body;
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
 
-    // Compress the image using sharp
-    const compressedImage = await sharp(buffer)
-      .resize({ width: 800 }) // Resize the image to a width of 800px
-      .toBuffer();
+    const fileName = `${Date.now()}-${req.file.originalname}`;
+    const uploadPath = path.join(__dirname, '../public/uploads', fileName);
 
-    const image = new Image({
-      name: originalname,
-      data: compressedImage,
-      contentType: mimetype,
-      aadharNumber
-    });
+    await fs.mkdir(path.dirname(uploadPath), { recursive: true });
+    await fs.writeFile(uploadPath, req.file.buffer);
 
-    await image.save();
-
-    res.status(201).json({
+    res.status(200).json({
       success: true,
-      data: {
-        ...image.toObject(),
-        data: image.data.toString('base64')
-      }
+      url: `/uploads/${fileName}`
     });
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
   }
 };
 

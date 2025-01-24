@@ -1,0 +1,43 @@
+[build]
+  functions = "netlify/functions"
+  command = "npm install && npm run build"
+  publish = "public"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = [
+    "express",
+    "serverless-http",
+    "mongoose",
+    "express-session",
+    "connect-mongo",
+    "swagger-ui-express",
+    "swagger-jsdoc",
+    "bcryptjs",
+    "uuid",
+    "multer",
+    "winston",
+    "winston-daily-rotate-file",
+    "bson"
+  ]
+  included_files = [
+    "utils/**/*",
+    "middleware/**/*",
+    "routes/**/*",
+    "models/**/*",
+    "swagger.js",
+    ".env",
+    "server.js"
+  ]
+
+[dev]
+  targetPort = 3000
+  command = "node netlify/functions/server.js" 
+  port = 8888
+  framework = "#custom"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server/:splat"
+  status = 200
+  force = true
